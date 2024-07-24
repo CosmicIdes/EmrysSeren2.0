@@ -1,5 +1,6 @@
 ﻿@page "/updates"
 @using MudBlazor
+@using EmrysSerenShared
 @inject HttpClient httpClient
 
 
@@ -10,95 +11,36 @@
         <h2>Updates</h2>
     </div>
     <br>
-    <MudTable T="BlogUpdate" Items="@BlogUpdates.Take(4)" Hover="true" Breakpoint="Breakpoint.None" @ref="mudTable"
-              RowClass="cursor-pointer" RowClassFunc="@SelectedRowClassFunc" OnRowClick="RowClickEvent">
+    <MudTable T="BlogPost" Items="@BlogPosts.Take(5)" Hover="true" Breakpoint="Breakpoint.None">
         <HeaderContent>
-            <MudTh>User</MudTh>
-            <MudTh>Date</MudTh>
-            <MudTh>Title</MudTh>
-            <MudTh>Comments</MudTh>
-            <MudTh>Tags</MudTh>
+            <MudTh>UserAvatar</MudTh>
+            <MudTh>UserName</MudTh>
+            <MudTh>BlogDate</MudTh>
+            <MudTh>BlogTitle</MudTh>
+            <MudTh>CommentCount</MudTh>
+            <MudTh>BlogPostTags</MudTh>
         </HeaderContent>
         <RowTemplate>
-            <MudTd DataLabel="User">@context.User</MudTd>
-            <MudTd DataLabel="Date">@context.Date</MudTd>
-            <MudTd DataLabel="Title">@context.Title</MudTd>
-            <MudTd DataLabel="Comments">"@context.Comments</MudTd>
-            <MudTd DataLabel="Tags">@context.Tags</MudTd>
-
+            <MudTd DataLabel="Avatar">@context.UserAvatar</MudTd>
+            <MudTd DataLabel="User">@context.UserName</MudTd>
+            <MudTd DataLabel="Date">@context.BlogPostDate</MudTd>
+            <MudTd DataLabel="Title">@context.BlogPostTitle</MudTd>
+            <MudTd DataLabel="Comments">"@context.CommentCount</MudTd>
+            <MudTd DataLabel="Tags">@context.BlogPostTags</MudTd>
         </RowTemplate>
     </MudTable>
 
-    <MudExpansionPanels Style="flex: 1;">
-        <MudExpansionPanel Text="Show inline-clicked event log">
-            @foreach (var message in clickedEvents)
-            {
-                <MudText>@message</MudText>
-            }
-            @if (clickedEvents.Count > 0)
-            {
-                <div class="d-flex">
-                    <MudSpacer />
-                    <MudButton Class="mt-3" ButtonType="ButtonType.Button" Variant="Variant.Filled" OnClick="@(() => clickedEvents.Clear())">Clear events</MudButton>
-                </div>
-            }
-        </MudExpansionPanel>
-    </MudExpansionPanels>
-
-
-
-    @*<div class="updatePage">
-            <div class="updateBox">
-                <section class="updateHeader">
-                    <h3 class="h3sub">First Update</h3>
-                </section>
-                <section class="updateTime">
-                    <h6>Posted at 1:38pm EST, 18 November 2021</h6>
-                </section>
-                <section class="updateTags">
-                    <p class="tags">tags: news</p>
-                </section>
-                <section class="updateBody">
-                    <article class="updatePost">
-                        <p>Hi! All updates will be posted on this page. More to come soon. Updates will include topics like new merchandise, artwork, and collaborations.</p>
-                    </article>
-                </section>
-            </div>
-        </div>*@
 </main>
 
 @code {
-    private int selectedRowNumber = -1;
-    private MudTable<BlogUpdate> mudTable;
-    private List<string> clickedEvents = new();
-    private IEnumerable<BlogUpdate> BlogUpdates = new List<BlogUpdate>()
-{
-        new BlogUpdate() { User = "EmrysSeren", Date = "July 17, 2024", Title = "First Post", Comments = 0, Tags = "New post" },
-        new BlogUpdate() { User = "EmrysSeren", Date = "July 17, 2024", Title = "First Post", Comments = 0, Tags = "New post" }
-    };
+    private MudTable<BlogPost> mudTable;
+    private IEnumerable<BlogPost> BlogPosts = new List<BlogPost>();
 
-    private void RowClickEvent(TableRowClickEventArgs<BlogUpdate> tableRowClickEventArgs)
+    protected override async Task OnInitializedAsync()
     {
-        clickedEvents.Add("Row has been clicked");
+        BlogPosts = await httpClient.GetFromJsonAsync<List<BlogPost>>("webapi/blogpost");
     }
 
-    private string SelectedRowClassFunc(BlogUpdate update, int rowNumber)
-    {
-        if (selectedRowNumber == rowNumber)
-        {
-            selectedRowNumber = -1;
-            clickedEvents.Add("Selected Row: None");
-            return string.Empty;
-        }
-        else if (mudTable.SelectedItem != null && mudTable.SelectedItem.Equals(update))
-        {
-            selectedRowNumber = rowNumber;
-            clickedEvents.Add($"Selected Row: {rowNumber}");
-            return "selected";
-        }
-        else
-        {
-            return string.Empty;
-        }
-    }
 }
+
+
