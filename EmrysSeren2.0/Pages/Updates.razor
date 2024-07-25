@@ -11,6 +11,12 @@
         <h2>Updates</h2>
     </div>
     <br>
+    @if (BlogPosts == null)
+    {
+        <p><em>Loading...</em></p>
+    }
+    else
+    {
     <MudTable T="BlogPost" Items="@BlogPosts.Take(5)" Hover="true" Breakpoint="Breakpoint.None">
         <HeaderContent>
             <MudTh>UserAvatar</MudTh>
@@ -19,6 +25,7 @@
             <MudTh>BlogTitle</MudTh>
             <MudTh>CommentCount</MudTh>
             <MudTh>BlogPostTags</MudTh>
+            <MudTh>Details</MudTh>
         </HeaderContent>
         <RowTemplate>
             <MudTd DataLabel="Avatar">@context.UserAvatar</MudTd>
@@ -27,9 +34,10 @@
             <MudTd DataLabel="Title">@context.BlogPostTitle</MudTd>
             <MudTd DataLabel="Comments">"@context.CommentCount</MudTd>
             <MudTd DataLabel="Tags">@context.BlogPostTags</MudTd>
+            <MudTd DataLabel="Link"><MudLink Href="@($"updatedetail/{context.BlogPostId}")"></MudTd>
         </RowTemplate>
     </MudTable>
-
+    }
 </main>
 
 @code {

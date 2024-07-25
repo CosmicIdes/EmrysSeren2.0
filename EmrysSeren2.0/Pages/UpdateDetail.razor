@@ -1,0 +1,45 @@
+﻿@page "/updatedetail/{BlogPostId}"
+@using EmrysSerenShared
+
+<h1>@BlogPost.BlogPostTitle</h1>
+<br />
+<div class="subHeader">
+    <h2>Updates</h2>
+</div>
+<br>
+<div class="updatePage">
+    <div class="updateBox">
+        <section class="updateHeader">
+            <h3 class="h3sub">@BlogPost.BlogPostTitle</h3>
+        </section>
+        <section class="updateTime">
+            <h6>Posted at @BlogPost.BlogPostTime @BlogPost.BlogPostDate</h6>
+        </section>
+        <section class="updateTags">
+            <p class="tags">@BlogPost.BlogPostTags</p>
+        </section>
+        <section class="updateBody">
+            <article class="updatePost">
+                @BlogPost.BlogPostBody
+            </article>
+        </section>
+    </div>
+</div>
+
+@code {
+
+    [Parameter]
+    public string BlogPostId { get; set; }
+
+    public BlogPost BlogPost { get; set; } = new BlogPost();
+
+    protected override Task OnInitializedAsync()
+    {
+        BlogPost = BlogPosts.FirstOrDefault(b => b.BlogPostId == int.Parse(BlogPostId));
+
+        return base.OnInitializedAsync();
+    }
+
+    public IEnumerable<BlogPost> BlogPosts { get; set; }
+
+}
