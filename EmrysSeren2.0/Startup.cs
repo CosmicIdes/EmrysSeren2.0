@@ -1,7 +1,7 @@
 ﻿using EmrysSerenAPI.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace EmrysSeren2.0
+namespace EmrysSeren2
 {
     public class Startup
 {
