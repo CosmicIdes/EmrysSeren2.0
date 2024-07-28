@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
+﻿<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
 
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
@@ -23,6 +23,7 @@
     <PackageReference Include="MudBlazor" Version="6.21.0" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\EmrysSerenAPI\EmrysSerenAPI.csproj" />
     <ProjectReference Include="..\EmrysSerenShared\EmrysSerenShared.csproj" />
   </ItemGroup>
 

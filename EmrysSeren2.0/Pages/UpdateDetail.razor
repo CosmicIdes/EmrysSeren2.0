@@ -23,6 +23,9 @@
                 @BlogPost.BlogPostBody
             </article>
         </section>
+        <section class="updateComments">
+            <p>@CommentPost.CommentPostDate @CommentPost.CommentPostTime</p>
+            <p>@CommentPost.CommentBody</p>
     </div>
 </div>
 
@@ -41,5 +44,7 @@
     }
 
     public IEnumerable<BlogPost> BlogPosts { get; set; }
+
+
 
 }
