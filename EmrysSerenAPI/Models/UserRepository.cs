@@ -1,4 +1,5 @@
 ﻿using EmrysSerenShared;
+using EmrysSerenData;
 
 namespace EmrysSerenAPI.Models
 {

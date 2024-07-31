@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
-namespace EmrysSerenAPI.Models
+namespace EmrysSerenData
 {
     public class ESDbContext : DbContext
     {
@@ -24,7 +24,7 @@ namespace EmrysSerenAPI.Models
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlite(Configuration.GetConnectionString(BlogDB));
+            optionsBuilder.UseSqlite(Configuration.GetConnectionString("BlogDB"));
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

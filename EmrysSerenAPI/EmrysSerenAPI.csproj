@@ -17,6 +17,9 @@
 
   <ItemGroup>
     <ProjectReference Include="..\EmrysSerenShared\EmrysSerenShared.csproj" />
+    <ProjectReference Include="..\EmrysSerenData\EmrysSerenData.csproj">
+      <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
+    </ProjectReference>
   </ItemGroup>
 
 </Project>

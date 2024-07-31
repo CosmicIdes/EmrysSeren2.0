@@ -1,4 +1,5 @@
 ﻿using EmrysSerenShared;
+using EmrysSerenData;
 
 namespace EmrysSerenAPI.Models
 {
@@ -49,7 +50,7 @@ namespace EmrysSerenAPI.Models
 
         public void DeleteBlogPost(int BlogPostId)
         {
-            var foundBlogPost = _esDbContext.BlogPosts.FirstOrDefault(p => p.BlogPostId == blogPost.BlogPostId);
+            var foundBlogPost = _esDbContext.BlogPosts.FirstOrDefault(p => p.BlogPostId == BlogPostId);
             if (foundBlogPost == null) return;
 
             _esDbContext.BlogPosts.Remove(foundBlogPost);

@@ -8,7 +8,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\EmrysSerenShared\EmrysSerenShared.csproj" />
-    <ProjectReference Include="..\EmrysSerenAPI\EmrysSerenAPI.csproj" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="7.0.20" />
