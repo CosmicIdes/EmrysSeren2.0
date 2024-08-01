@@ -10,6 +10,8 @@ builder.RootComponents.Add<HeadOutlet>("head::after");
 
 var connectionString = builder.Configuration.GetConnectionString("BlogDB");
 
+builder.Services.AddDbContextFactory<EmployeeDataContext>(options => options.UseSqlite(connectionString));
+
 
 builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 
